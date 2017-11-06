@@ -55,4 +55,22 @@ public class MemberDaolmpl implements MemberDao{
 		return mapper.get_member_info(map);
 	}
 
+
+
+	@Override
+	public List select_member(Map map) {
+	MemberMapper mapper = sqlSession.getMapper(MemberMapper.class);
+		
+		return (List) mapper.select_member(map);
+	}
+
+	@Override
+	public int selectCnt(Map map) {
+	MemberMapper mapper = sqlSession.getMapper(MemberMapper.class);
+		
+		return  mapper.selectCnt(map);
+	}
+
+
+
 }

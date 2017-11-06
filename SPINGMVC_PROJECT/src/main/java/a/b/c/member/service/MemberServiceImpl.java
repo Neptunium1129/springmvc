@@ -29,6 +29,11 @@ public class MemberServiceImpl implements MemberService {
 		
 		return memberdao.select_member();
 	}
+	@Override
+	public List select_member(Map map) {
+		
+		return memberdao.select_member(map);
+	}
 	
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
 
@@ -50,6 +55,12 @@ public class MemberServiceImpl implements MemberService {
 		
 		return memberdao.get_member_info(map);
 	}
+
+	@Override
+	public int selectCnt(Map map) {
+		return memberdao.selectCnt(map);
+	}
+
 
 
 	

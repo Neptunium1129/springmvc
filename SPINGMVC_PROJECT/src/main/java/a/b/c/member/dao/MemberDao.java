@@ -9,10 +9,15 @@ public interface MemberDao {
 
 	public List select_member();
 	
+	public List select_member(Map map);
+	
 	public int delete_member(Map map);
 	
 	public int update_member(Map map);
 	
 	public Object get_member_info(Map map);
+
+	public int selectCnt(Map map);
+
 
 }

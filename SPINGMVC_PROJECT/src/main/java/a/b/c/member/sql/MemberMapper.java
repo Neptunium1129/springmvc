@@ -15,5 +15,9 @@ public interface MemberMapper {
 	
 	public Object get_member_info(Map map);
 
+	public List select_member(Map map);
+	
+	public int selectCnt(Map map);
+
 
 }

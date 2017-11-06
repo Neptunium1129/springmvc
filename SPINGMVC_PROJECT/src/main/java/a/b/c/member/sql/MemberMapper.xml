@@ -10,25 +10,58 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				insert into member (
 				 name
 				  ,age
-				  ,gender
-				
+			      ,gender
+				  ,o_file_name
+				  ,n_file_name
 				) VALUES (
 				
 				  #{name}
 				  ,#{age}  
 				  ,#{gender}  
-				
+				  ,#{o_file_name}  
+				  ,#{n_file_name}  
+		
 				)
 		
 		</insert>
 
-		<select id="select_member" resultType="map">
+		<select id="select_member" parameterType="map" resultType="map">
 		
 		select * from member 
-		order By seq desc
+		<if test="null !=seq">
+		where seq = #{seq}
+		</if>
 		
+		<if test="null !=name">
+		where name LIKE CONCAT ('%',#{name}, '%')
+		</if>
+		
+		
+		order By seq desc
+		<if test="null !=sIdx">
+		LIMIT #{sIdx},2
+		</if>
+		</select>
+		
+		<select id="selectCnt" parameterType="map" resultType="int">
+		
+		select COUNT(*) from member 
+		<if test="null !=seq">
+		where seq = #{seq}
+		</if>
+		
+		<if test="null !=name">
+		where name LIKE CONCAT ('%',#{name}, '%')
+		</if>
+		
+		order By seq desc
+
 		
 		</select>
+		
+		
+
+		
 		
 		<delete id="delete_member" parameterType="map">
 		
@@ -52,5 +85,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	
 	</select>
+	
+	
+	
 	
 </mapper>
