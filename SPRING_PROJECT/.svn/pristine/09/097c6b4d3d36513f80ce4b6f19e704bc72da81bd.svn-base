@@ -1,0 +1,58 @@
+CREATE DATABASE spring;
+
+CREATE TABLE `member` (
+  `seq` int(11) NOT NULL AUTO_INCREMENT,
+  `id` varchar(20) NOT NULL,
+  `password` varchar(200) NOT NULL,
+  `name` varchar(20) NOT NULL,
+  `phone` varchar(11) NOT NULL,
+  `age` int(3) NOT NULL,
+  `reg_date` char(12) CHARACTER SET latin1 NOT NULL,
+  PRIMARY KEY (`seq`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+---------------------------------------------------------------
+
+DROP PROCEDURE IF EXISTS jsp.insertMember;
+
+CREATE PROCEDURE jsp.`insertMember`(
+        _name varchar(20)
+        ,_id varchar(20)
+		  	,_password varchar(200)
+		  	,_phone varchar(11)
+		  	,_age int(3)
+		  	,_reg_date char(12))
+BEGIN
+
+	DECLARE _result int;
+  
+  DECLARE exit handler for SQLEXCEPTION 
+  BEGIN 
+    ROLLBACK; 
+    SET _result = 0; 
+    select _result; 
+  END;
+  
+  START TRANSACTION; 
+  INSERT INTO member (
+		name
+  	,id
+  	,password
+  	,phone
+  	,age
+  	,reg_date
+  ) VALUES (
+	  _name
+    ,_id
+  	,_password
+  	,_phone
+  	,_age
+  	,_reg_date
+	);
+  COMMIT;
+  
+  SET _result = 1; 
+  select _result;
+  
+END;
